@@ -1,0 +1,148 @@
+﻿-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema LimasArtes
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema LimasArtes
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `LimasArtes` DEFAULT CHARACTER SET utf8 ;
+USE `LimasArtes` ;
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_CLIENTE`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_CLIENTE` (
+  `ID_CLIENTE` INT NOT NULL AUTO_INCREMENT,
+  `DS_CLIENTE` VARCHAR(55) NOT NULL,
+  `DS_CELULAR` VARCHAR(15) NOT NULL,
+  `DS_TELEFONE` VARCHAR(15) NULL,
+  `OBS_CLIENTE` VARCHAR(500) NULL,
+  `DT_CADASTRO` DATETIME NOT NULL,
+  PRIMARY KEY (`ID_CLIENTE`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_PERMISSAO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_PERMISSAO` (
+  `ID_PERMISSAO` VARCHAR(3) NOT NULL,
+  `DS_PERMISSAO` VARCHAR(45) NOT NULL,
+  `DT_CADASTRO` DATETIME NOT NULL,
+  PRIMARY KEY (`ID_PERMISSAO`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_FUNCIONARIO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_FUNCIONARIO` (
+  `ID_FUNCIONARIO` INT NOT NULL,
+  `DS_USUARIO` VARCHAR(50) NOT NULL,
+  `DS_SENHA` VARCHAR(50) NOT NULL,
+  `DS_FUNCIONARIO` VARCHAR(55) NOT NULL,
+  `DS_EMAIL` VARCHAR(80) NULL,
+  `DS_CELULAR` VARCHAR(15) NULL,
+  `DS_TELEFONE` VARCHAR(15) NULL,
+  `DT_CADASTRO` DATETIME NOT NULL,
+  `FK_PERMISSAO` VARCHAR(3) NOT NULL,
+  PRIMARY KEY (`ID_FUNCIONARIO`),
+  INDEX `AXFK_PERMISSOES_idx` (`FK_PERMISSAO` ASC) VISIBLE,
+  CONSTRAINT `FK_PERMISSOES`
+    FOREIGN KEY (`FK_PERMISSAO`)
+    REFERENCES `LimasArtes`.`TB_PERMISSAO` (`ID_PERMISSAO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_CATEGORIA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_CATEGORIA` (
+  `ID_CATEGORIA` INT NOT NULL,
+  `DS_CATEGORIA` VARCHAR(55) NOT NULL,
+  PRIMARY KEY (`ID_CATEGORIA`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_PRODUTO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_PRODUTO` (
+  `ID_PRODUTO` INT NOT NULL,
+  `DS_PRODUTO` VARCHAR(50) NOT NULL,
+  `VL_UNITARIO` DECIMAL NOT NULL,
+  `OBS_PRODUTO` VARCHAR(45) NULL,
+  `DT_CADASTRO` DATETIME NOT NULL,
+  `FK_CATEGORIA` INT NOT NULL,
+  PRIMARY KEY (`ID_PRODUTO`),
+  INDEX `ID_CATEGORIA_idx` (`FK_CATEGORIA` ASC) VISIBLE,
+  CONSTRAINT `ID_CATEGORIA`
+    FOREIGN KEY (`FK_CATEGORIA`)
+    REFERENCES `LimasArtes`.`TB_CATEGORIA` (`ID_CATEGORIA`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_PEDIDO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_PEDIDO` (
+  `ID_PEDIDO` INT NOT NULL AUTO_INCREMENT,
+  `VL_PEDIDO` INT NOT NULL,
+  `OBS_PEDIDO` VARCHAR(500) NULL,
+  `DT_PEDIDO` DATETIME NOT NULL,
+  `FK_FUNCIONARIO` INT NOT NULL,
+  `FK_CLIENTE` INT NOT NULL,
+  PRIMARY KEY (`ID_PEDIDO`),
+  INDEX `FK_CLIENTE_idx` (`FK_CLIENTE` ASC) VISIBLE,
+  INDEX `FK_FUNCIONARIO_idx` (`FK_FUNCIONARIO` ASC) VISIBLE,
+  CONSTRAINT `FK_FUNCIONARIO`
+    FOREIGN KEY (`FK_FUNCIONARIO`)
+    REFERENCES `LimasArtes`.`TB_FUNCIONARIO` (`ID_FUNCIONARIO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_CLIENTE`
+    FOREIGN KEY (`FK_CLIENTE`)
+    REFERENCES `LimasArtes`.`TB_CLIENTE` (`ID_CLIENTE`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimasArtes`.`TB_PEDIDO_ITEM`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_PEDIDO_ITEM` (
+  `ID_PEDIDOITEM` INT NOT NULL,
+  `VL_UNITARIO` DECIMAL NOT NULL,
+  `QTD_PRODUTO` INT NOT NULL,
+  `FK_PRODUTO` INT NOT NULL,
+  `FK_PEDIDO` INT NOT NULL,
+  PRIMARY KEY (`ID_PEDIDOITEM`),
+  INDEX `FK_PRODUTO_idx` (`FK_PRODUTO` ASC) VISIBLE,
+  INDEX `FK_PEDIDO_idx` (`FK_PEDIDO` ASC) VISIBLE,
+  CONSTRAINT `FK_PRODUTO`
+    FOREIGN KEY (`FK_PRODUTO`)
+    REFERENCES `LimasArtes`.`TB_PRODUTO` (`ID_PRODUTO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_PEDIDO`
+    FOREIGN KEY (`FK_PEDIDO`)
+    REFERENCES `LimasArtes`.`TB_PEDIDO` (`ID_PEDIDO`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
