@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LimasArtes.Base
 {
-    class Connection
+    public class Connection
     {
         public MySqlConnection Create()
         {

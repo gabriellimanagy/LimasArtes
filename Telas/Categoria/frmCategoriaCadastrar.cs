@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,8 +27,16 @@ namespace LimasArtes.Telas.Categoria
             {
                 Categoria = txtNome.Text
             };
+            try
+            {
+                _ = business.Salvar(categoriaDTO);
+            }
+            catch(Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+            
 
-            _ = business.Salvar(categoriaDTO);
             
         }
     }

@@ -334,14 +334,14 @@
             this.btnCadastrarCliente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
             this.btnCadastrarCliente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
             this.btnCadastrarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCadastrarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCadastrarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCadastrarCliente.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnCadastrarCliente.Location = new System.Drawing.Point(0, 0);
             this.btnCadastrarCliente.Name = "btnCadastrarCliente";
             this.btnCadastrarCliente.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.btnCadastrarCliente.Size = new System.Drawing.Size(216, 40);
             this.btnCadastrarCliente.TabIndex = 0;
-            this.btnCadastrarCliente.Text = "Cadastrar Cliente";
+            this.btnCadastrarCliente.Text = "Cadastrar Categoria";
             this.btnCadastrarCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCadastrarCliente.UseVisualStyleBackColor = true;
             this.btnCadastrarCliente.Click += new System.EventHandler(this.btnCadastrarCliente_Click);

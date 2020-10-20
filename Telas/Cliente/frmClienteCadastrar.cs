@@ -25,14 +25,14 @@ namespace LimasArtes.Telas
         
         MessageBoxInteligente Mbox = new MessageBoxInteligente();
 
-        public void Alterar(ClienteDTO cliente)
+        public void Alterar(ClienteDTO clienteDTO)
         {
-            CarregarCliente(cliente);
+            CarregarCliente(clienteDTO);
             Resposta = "Sem alterações";
         }
-        public void Zoom(ClienteDTO cliente)
+        public void Zoom(ClienteDTO clienteDTO)
         {
-            CarregarCliente(cliente);
+            CarregarCliente(clienteDTO);
             txtNome.ReadOnly = true;
             txtCelular.ReadOnly = true;
             txtTelefone.ReadOnly = true;

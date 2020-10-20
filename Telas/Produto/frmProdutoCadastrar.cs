@@ -19,6 +19,7 @@ namespace LimasArtes.Telas.Produto
             InitializeComponent();
             CarregarCombo();
         }
+        public int ID { get; set; }
 
         public void CarregarCombo()
         {
@@ -36,7 +37,7 @@ namespace LimasArtes.Telas.Produto
             {
                 Produto = txtNome.Text,
                 Vl_Unitario = Convert.ToDecimal(txtVLUnitario.Text),
-                // FK_Categoria = (Colocar após configurar a combo box
+                // FK_Categoria = (Colocar após configurar a combo box)
                 Observacao = txtObs.Text
             };
         }
@@ -49,6 +50,23 @@ namespace LimasArtes.Telas.Produto
         private void btnClose_Click(object sender, EventArgs e)
         {
 
+        }
+        public void Zoom(ProdutoDTO produtoDTO)
+        {
+            CarregarProduto(produtoDTO);
+            txtNome.ReadOnly = true;
+            txtVLUnitario.ReadOnly = true;
+            txtObs.ReadOnly = true;
+            cboCategoria.Enabled = false;
+            btnCONFIRMAR.Enabled = false;
+        }
+        public void CarregarProduto(ProdutoDTO produtoDTO)
+        {
+            ID = produtoDTO.ID_Produto;
+            lblID.Text = "ID: " + Convert.ToString(ID);
+            txtNome.Text = produtoDTO.Produto;
+            txtVLUnitario.Text = Convert.ToString(produtoDTO.Vl_Unitario);
+            txtObs.Text = produtoDTO.Observacao;
         }
     }
 }

@@ -26,7 +26,9 @@ namespace LimasArtes.Telas.Cliente
         }
 
         private readonly MessageBoxInteligente Mbox = new MessageBoxInteligente();
+
         private readonly frmClienteCadastrar tela = new frmClienteCadastrar();
+        
         private readonly ClienteBusiness business = new ClienteBusiness();
 
         private int selectedRowIndex { get; set; }

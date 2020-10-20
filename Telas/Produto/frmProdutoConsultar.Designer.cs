@@ -32,14 +32,14 @@
             this.btnCONSULTAR = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtConsulta = new System.Windows.Forms.TextBox();
-            this.dgvCliente = new System.Windows.Forms.DataGridView();
+            this.dgvProduto = new System.Windows.Forms.DataGridView();
             this.Column_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Celular = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Telefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Alterar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column_Excluir = new System.Windows.Forms.DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProduto)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCONSULTAR
@@ -72,31 +72,31 @@
             this.txtConsulta.Size = new System.Drawing.Size(352, 26);
             this.txtConsulta.TabIndex = 6;
             // 
-            // dgvCliente
+            // dgvProduto
             // 
-            this.dgvCliente.AllowUserToAddRows = false;
-            this.dgvCliente.AllowUserToDeleteRows = false;
-            this.dgvCliente.AllowUserToResizeColumns = false;
-            this.dgvCliente.AllowUserToResizeRows = false;
-            this.dgvCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvProduto.AllowUserToAddRows = false;
+            this.dgvProduto.AllowUserToDeleteRows = false;
+            this.dgvProduto.AllowUserToResizeColumns = false;
+            this.dgvProduto.AllowUserToResizeRows = false;
+            this.dgvProduto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCliente.BackgroundColor = System.Drawing.Color.White;
-            this.dgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvProduto.BackgroundColor = System.Drawing.Color.White;
+            this.dgvProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProduto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_ID,
             this.Column_Cliente,
             this.Column_Celular,
             this.Column_Telefone,
             this.Column_Alterar,
             this.Column_Excluir});
-            this.dgvCliente.Location = new System.Drawing.Point(12, 48);
-            this.dgvCliente.Name = "dgvCliente";
-            this.dgvCliente.ReadOnly = true;
-            this.dgvCliente.RowHeadersVisible = false;
-            this.dgvCliente.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvCliente.Size = new System.Drawing.Size(927, 621);
-            this.dgvCliente.TabIndex = 5;
+            this.dgvProduto.Location = new System.Drawing.Point(12, 48);
+            this.dgvProduto.Name = "dgvProduto";
+            this.dgvProduto.ReadOnly = true;
+            this.dgvProduto.RowHeadersVisible = false;
+            this.dgvProduto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvProduto.Size = new System.Drawing.Size(927, 621);
+            this.dgvProduto.TabIndex = 5;
             // 
             // Column_ID
             // 
@@ -164,13 +164,13 @@
             this.Controls.Add(this.btnCONSULTAR);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtConsulta);
-            this.Controls.Add(this.dgvCliente);
+            this.Controls.Add(this.dgvProduto);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmProdutoConsultar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmProdutoConsultar";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProduto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,7 +181,7 @@
         private System.Windows.Forms.Button btnCONSULTAR;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtConsulta;
-        private System.Windows.Forms.DataGridView dgvCliente;
+        private System.Windows.Forms.DataGridView dgvProduto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Celular;

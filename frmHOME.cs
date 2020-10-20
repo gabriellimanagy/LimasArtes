@@ -1,4 +1,5 @@
 ﻿using LimasArtes.Telas;
+using LimasArtes.Telas.Categoria;
 using LimasArtes.Telas.Cliente;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,7 @@ namespace LimasArtes
 
         private void btnCadastrarCliente_Click(object sender, EventArgs e)
         {
-            AbrirPanelInterno(new frmClienteCadastrar());
+            AbrirPanelInterno(new frmCategoriaConsultar());
 
         }
         #endregion
