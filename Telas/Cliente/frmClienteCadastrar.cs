@@ -23,22 +23,9 @@ namespace LimasArtes.Telas
         public string Resposta { get; set; }
         public int ID { get; set; }
         
+
         MessageBoxInteligente Mbox = new MessageBoxInteligente();
 
-        public void Alterar(ClienteDTO clienteDTO)
-        {
-            CarregarCliente(clienteDTO);
-            Resposta = "Sem alterações";
-        }
-        public void Zoom(ClienteDTO clienteDTO)
-        {
-            CarregarCliente(clienteDTO);
-            txtNome.ReadOnly = true;
-            txtCelular.ReadOnly = true;
-            txtTelefone.ReadOnly = true;
-            txtObs.ReadOnly = true;
-            btnCONFIRMAR.Enabled = false;
-        }
         private void btnCONFIRMAR_Click(object sender, EventArgs e)
         {
             ClienteBusiness business = new ClienteBusiness();
@@ -83,16 +70,6 @@ namespace LimasArtes.Telas
             }
             
         }
-
-        private void CarregarCliente(ClienteDTO cliente)
-        {
-            ID = cliente.ID_Cliente;
-            lblID.Text = "ID: " + Convert.ToString(ID);
-            txtNome.Text = cliente.Nome_Cliente;
-            txtCelular.Text = cliente.Celular;
-            txtTelefone.Text = cliente.Telefone;
-            txtObs.Text = cliente.Observacao;
-        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -105,7 +82,6 @@ namespace LimasArtes.Telas
                 Close();
             }
         }
-
         private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar))
@@ -113,13 +89,37 @@ namespace LimasArtes.Telas
                 e.Handled = true;
             }
         }
-
         private void txtTelefone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
+        }
+
+        public void Alterar(ClienteDTO clienteDTO)
+        {
+            CarregarCliente(clienteDTO);
+            Resposta = "Sem alterações";
+        }
+        public void Zoom(ClienteDTO clienteDTO)
+        {
+            CarregarCliente(clienteDTO);
+            txtNome.ReadOnly = true;
+            txtCelular.ReadOnly = true;
+            txtTelefone.ReadOnly = true;
+            txtObs.ReadOnly = true;
+            btnCONFIRMAR.Enabled = false;
+        }
+
+        private void CarregarCliente(ClienteDTO cliente)
+        {
+            ID = cliente.ID_Cliente;
+            lblID.Text = "ID: " + Convert.ToString(ID);
+            txtNome.Text = cliente.Nome_Cliente;
+            txtCelular.Text = cliente.Celular;
+            txtTelefone.Text = cliente.Telefone;
+            txtObs.Text = cliente.Observacao;
         }
     }
 }

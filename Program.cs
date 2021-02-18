@@ -1,4 +1,5 @@
-﻿using LimasArtes.Telas.Produto;
+﻿using LimasArtes.Telas.Categoria;
+using LimasArtes.Telas.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

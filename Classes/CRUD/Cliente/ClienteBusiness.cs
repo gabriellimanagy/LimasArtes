@@ -29,9 +29,9 @@ namespace LimasArtes.Classes.Cliente
             db.Alterar(clienteDTO);
         }
 
-        public void Remover(int clienteDTO)
+        public void Remover(int idCliente)
         {
-            db.Remover(clienteDTO);
+            db.Remover(idCliente);
         }
 
         public List<ClienteDTO> Listar()
@@ -42,6 +42,11 @@ namespace LimasArtes.Classes.Cliente
         public ClienteDTO Consultar_ID(int ID)
         {
             ClienteDTO clienteDTO = db.Consultar_ID(ID);
+            return clienteDTO;
+        }
+        public List<ClienteDTO> Consultar (string argumentoBusca)
+        {
+            List<ClienteDTO> clienteDTO = db.Consultar(argumentoBusca);
             return clienteDTO;
         }
     }

@@ -117,7 +117,15 @@ CREATE TABLE IF NOT EXISTS `LimasArtes`.`TB_PEDIDO` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
+CREATE TABLE TB_ESTOQUE 
+(
+	ID_ESTOQUE INT PRIMARY KEY AUTO_INCREMENT,
+	QTD_PRODUTO INT, 
+    FK_PRODUTO INT,
+    DATA_INCLUSAO DATE,
+    
+    FOREIGN KEY (FK_PRODUTO) REFERENCES TB_PRODUTO (ID_PRODUTO)
+)
 -- -----------------------------------------------------
 -- Table `LimasArtes`.`TB_PEDIDO_ITEM`
 -- -----------------------------------------------------

@@ -26,9 +26,6 @@ namespace LimasArtes.Telas.Cliente
         }
 
         private readonly MessageBoxInteligente Mbox = new MessageBoxInteligente();
-
-        private readonly frmClienteCadastrar tela = new frmClienteCadastrar();
-        
         private readonly ClienteBusiness business = new ClienteBusiness();
 
         private int selectedRowIndex { get; set; }
@@ -38,7 +35,9 @@ namespace LimasArtes.Telas.Cliente
         {
             if (e.ClickedItem.Text == "Cadastrar")
             {
-                tela.ShowDialog();
+                frmClienteCadastrar tela = new frmClienteCadastrar();
+
+                tela.Show();
                 Listar();
             }
             else if (e.ClickedItem.Text == "Zoom")
@@ -48,16 +47,22 @@ namespace LimasArtes.Telas.Cliente
         }
         #endregion
 
+        #region Eventos
         private void btnCONSULTAR_Click(object sender, EventArgs e)
         {
             if (txtConsulta.Text == string.Empty)
             {
                 Listar();
             }
+            else
+            {
+                // Consultar(); #PRECISA# - descrição: precisa ser criado
+            }
         }
 
         private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             selectedRowIndex = e.RowIndex;
             if (e.ColumnIndex == 5 && selectedRowIndex >= 0)
             {
@@ -75,12 +80,11 @@ namespace LimasArtes.Telas.Cliente
         {
             Zoom();
         }
+        #endregion
 
         #region Métodos
         private void Listar()
         {
-            ClienteBusiness business = new ClienteBusiness();
-
             List<ClienteDTO> clienteDTO = business.Listar();
 
             dgvCliente.AutoGenerateColumns = false;
@@ -89,9 +93,10 @@ namespace LimasArtes.Telas.Cliente
         private void Alterar()
         {
             ClienteDTO cliente = dgvCliente.Rows[selectedRowIndex].DataBoundItem as ClienteDTO;
+            frmClienteCadastrar tela = new frmClienteCadastrar();
 
             tela.Alterar(cliente);
-            tela.ShowDialog();
+            tela.Show();
 
             string resposta = tela.Resposta;
 
@@ -126,10 +131,14 @@ namespace LimasArtes.Telas.Cliente
         }
         private void Zoom()
         {
-            ClienteDTO cliente = dgvCliente.Rows[selectedRowIndex].DataBoundItem as ClienteDTO;
+            if(dgvCliente.RowCount > 0) 
+            { 
+                ClienteDTO cliente = dgvCliente.Rows[selectedRowIndex].DataBoundItem as ClienteDTO;
+                frmClienteCadastrar tela = new frmClienteCadastrar();
 
-            tela.Zoom(cliente);
-            tela.ShowDialog();
+                tela.Zoom(cliente);
+                tela.Show();
+            }
         }
         #endregion
     }

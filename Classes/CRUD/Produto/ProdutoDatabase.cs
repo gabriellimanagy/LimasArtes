@@ -10,6 +10,8 @@ namespace LimasArtes.Classes.Cliente
 {
     public class ProdutoDatabase
     {
+        Database db = new Database();
+
         public int Salvar(ProdutoDTO produtoDTO)
         {
             string script =
@@ -25,8 +27,6 @@ namespace LimasArtes.Classes.Cliente
             parms.Add(new MySqlParameter("DT_CADASTRO"  , produtoDTO.Dt_Cadastro));
             parms.Add(new MySqlParameter("FK_CATEGORIA" , produtoDTO.FK_Categoria));
 
-
-            Database db = new Database();
             int pk = db.ExecuteInsertScriptWithPK(script, parms);
             return pk;
 
@@ -54,9 +54,6 @@ namespace LimasArtes.Classes.Cliente
             parms.Add(new MySqlParameter("DT_CADASTRO"  , produtoDTO.Dt_Cadastro));
             parms.Add(new MySqlParameter("FK_CATEGORIA" , produtoDTO.FK_Categoria));
 
-
-
-            Database db = new Database();
             db.ExecuteInsertScript(script, parms);
         }
 
@@ -69,7 +66,6 @@ namespace LimasArtes.Classes.Cliente
 
             parms.Add(new MySqlParameter("ID_PRODUTO", ID));
 
-            Database db = new Database();
             db.ExecuteInsertScript(script, parms);
         }
 
@@ -78,7 +74,6 @@ namespace LimasArtes.Classes.Cliente
             string script =
                 @"SELECT * FROM TB_PRODUTO";
 
-            Database db = new Database();
             MySqlDataReader reader = db.ExecuteSelectScript(script, null);
 
             List<ProdutoDTO> lstProdutoDTO = new List<ProdutoDTO>();
@@ -90,6 +85,35 @@ namespace LimasArtes.Classes.Cliente
                 produtoDTO.Vl_Unitario  = reader.GetDecimal("VL_UNITARIO");
                 produtoDTO.Observacao   = reader.GetString("OBS_PRODUTO");
                 produtoDTO.Dt_Cadastro  = reader.GetDateTime("DT_CADASTRO");
+                produtoDTO.FK_Categoria = reader.GetInt32("FK_CATEGORIA");
+
+                lstProdutoDTO.Add(produtoDTO);
+            }
+            reader.Close();
+
+            return lstProdutoDTO;
+        }
+
+        public List<ProdutoDTO> Consultar(string argumentoBusca)
+        {
+
+            string script =
+                @"SELECT * FROM TB_PRODUTO WHERE DS_PRODUTO LIKE @DS_PRODUTO" + "%";
+
+            List<MySqlParameter> parms = new List<MySqlParameter>();
+            parms.Add(new MySqlParameter("DS_PRODUTO", argumentoBusca));
+
+            MySqlDataReader reader = db.ExecuteSelectScript(script, parms);
+
+            List<ProdutoDTO> lstProdutoDTO = new List<ProdutoDTO>();
+            while (reader.Read())
+            {
+                ProdutoDTO produtoDTO = new ProdutoDTO();
+                produtoDTO.ID_Produto = reader.GetInt32("ID_PRODUTO");
+                produtoDTO.Produto = reader.GetString("DS_PRODUTO");
+                produtoDTO.Vl_Unitario = reader.GetDecimal("VL_UNITARIO");
+                produtoDTO.Observacao = reader.GetString("OBS_PRODUTO");
+                produtoDTO.Dt_Cadastro = reader.GetDateTime("DT_CADASTRO");
                 produtoDTO.FK_Categoria = reader.GetInt32("FK_CATEGORIA");
 
                 lstProdutoDTO.Add(produtoDTO);

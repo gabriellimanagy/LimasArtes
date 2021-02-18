@@ -13,6 +13,9 @@ namespace LimasArtes.Telas.Produto
 {
     public partial class frmProdutoConsultar : Form
     {
+
+        ProdutoBusiness business = new ProdutoBusiness();
+
         public frmProdutoConsultar()
         {
             InitializeComponent();
@@ -47,12 +50,22 @@ namespace LimasArtes.Telas.Produto
 
         private void btnCONSULTAR_Click(object sender, EventArgs e)
         {
-
+            if (txtConsulta.Text == string.Empty)
+            {
+                Listar();
+            }
+            else
+            {
+                Consultar(); 
+            }
         }
 
+        private void Consultar()
+        {
+           
+        }
         private void Listar()
         {
-            ProdutoBusiness business = new ProdutoBusiness();
 
             List<ProdutoDTO> produtoDTO = business.Listar();
 

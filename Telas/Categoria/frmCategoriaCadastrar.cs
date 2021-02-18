@@ -1,4 +1,5 @@
 ﻿using LimasArtes.Classes.CRUD.Categoria;
+using LimasArtes.Classes.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,10 +19,14 @@ namespace LimasArtes.Telas.Categoria
         {
             InitializeComponent();
         }
-        
+        public string Resposta { get; set; }
+        public int ID { get; set; }
+
+        MessageBoxInteligente Mbox = new MessageBoxInteligente();
+        CategoriaBusiness business = new CategoriaBusiness();
+
         private void btnCONFIRMAR_Click(object sender, EventArgs e)
         {
-            CategoriaBusiness business = new CategoriaBusiness();
             
             CategoriaDTO categoriaDTO = new CategoriaDTO
             {
@@ -29,15 +34,45 @@ namespace LimasArtes.Telas.Categoria
             };
             try
             {
+                if (Resposta == "Sem alterações")
+                {
+                    categoriaDTO.ID_Categoria = ID;
+                }
+                if (ID > 0)
+                {
+                    business.Alterar(categoriaDTO);
+
+                    string mensagem = "Alterado com sucesso";
+                    Mbox.Info(mensagem);
+
+                    Resposta = "Alterado";
+                    Close();
+                }
                 _ = business.Salvar(categoriaDTO);
             }
             catch(Exception a)
             {
                 MessageBox.Show(a.Message);
             }
-            
+        }
+      
+        public void Alterar(CategoriaDTO categoriaDTO)
+        {
+            CarregarCategoria(categoriaDTO);
+            Resposta = "Sem alterações";
+        }
 
-            
+        public void Zoom(CategoriaDTO categoriaDTO)
+        {
+            CarregarCategoria(categoriaDTO);
+            txtNome.ReadOnly = true;
+            btnCONFIRMAR.Enabled = false;
+        }
+
+        private void CarregarCategoria(CategoriaDTO categoriaDTO)
+        {
+            ID = categoriaDTO.ID_Categoria;
+            lblID.Text = "ID: " + Convert.ToString(ID);
         }
     }
 }

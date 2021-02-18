@@ -28,7 +28,6 @@ namespace LimasArtes.Classes.Cliente
             
             int pk = db.ExecuteInsertScriptWithPK(script, parms);
             return pk;
-
         }
 
         public void Alterar(ClienteDTO clienteDTO)
@@ -80,12 +79,12 @@ namespace LimasArtes.Classes.Cliente
             {
                 ClienteDTO clienteDTO = new ClienteDTO
                 {
-                    ID_Cliente = reader.GetInt32("ID_CLIENTE"),
-                    Nome_Cliente = reader.GetString("DS_CLIENTE"),
-                    Celular = reader.GetString("DS_CELULAR"),
-                    Telefone = reader.GetString("DS_TELEFONE"),
-                    Observacao = reader.GetString("OBS_CLIENTE"),
-                    Dt_Cadastro = reader.GetDateTime("DT_CADASTRO")
+                    ID_Cliente      = reader.GetInt32("ID_CLIENTE"),
+                    Nome_Cliente    = reader.GetString("DS_CLIENTE"),
+                    Celular         = reader.GetString("DS_CELULAR"),
+                    Telefone        = reader.GetString("DS_TELEFONE"),
+                    Observacao      = reader.GetString("OBS_CLIENTE"),
+                    Dt_Cadastro     = reader.GetDateTime("DT_CADASTRO")
                 };
 
                 lstClienteDTO.Add(clienteDTO);
@@ -97,7 +96,6 @@ namespace LimasArtes.Classes.Cliente
 
         public ClienteDTO Consultar_ID(int ID)
         {
-
             string script =
                 @"SELECT * FROM TB_CLIENTE WHERE ID_CLIENTE = @ID_CLIENTE";
 
@@ -110,14 +108,44 @@ namespace LimasArtes.Classes.Cliente
             
             while (reader.Read())
             {
-                clienteDTO.ID_Cliente = reader.GetInt32("ID_CLIENTE");
+                clienteDTO.ID_Cliente   = reader.GetInt32("ID_CLIENTE");
                 clienteDTO.Nome_Cliente = reader.GetString("DS_CLIENTE");
-                clienteDTO.Celular = reader.GetString("DS_CELULAR");
-                clienteDTO.Telefone = reader.GetString("DS_TELEFONE");
-                clienteDTO.Observacao = reader.GetString("OBS_CLIENTE");
-                clienteDTO.Dt_Cadastro = reader.GetDateTime("DT_CADASTRO");
+                clienteDTO.Celular      = reader.GetString("DS_CELULAR");
+                clienteDTO.Telefone     = reader.GetString("DS_TELEFONE");
+                clienteDTO.Observacao   = reader.GetString("OBS_CLIENTE");
+                clienteDTO.Dt_Cadastro  = reader.GetDateTime("DT_CADASTRO");
             }
             return clienteDTO;
+        }
+
+        public List<ClienteDTO> Consultar(string argumentoBusca)
+        {
+
+            string script =
+                @"SELECT * FROM TB_CLIENTE WHERE DS_CLIENTE LIKE @DS_CLIENTE" + "%";
+
+            List<MySqlParameter> parms = new List<MySqlParameter>();
+            parms.Add(new MySqlParameter("DS_CATEGORIA", argumentoBusca));
+
+            MySqlDataReader reader = db.ExecuteSelectScript(script, parms);
+
+            List<ClienteDTO> lstclienteDTO = new List<ClienteDTO>();
+            while (reader.Read())
+            {
+                ClienteDTO clienteDTO = new ClienteDTO();
+                
+                clienteDTO.ID_Cliente   = reader.GetInt32("ID_CLIENTE");
+                clienteDTO.Nome_Cliente = reader.GetString("DS_CLIENTE");
+                clienteDTO.Celular      = reader.GetString("DS_CELULAR");
+                clienteDTO.Telefone     = reader.GetString("DS_TELEFONE");
+                clienteDTO.Observacao   = reader.GetString("OBS_CLIENTE");
+                clienteDTO.Dt_Cadastro  = reader.GetDateTime("DT_CADASTRO");
+
+                lstclienteDTO.Add(clienteDTO);
+            }
+            reader.Close();
+
+            return lstclienteDTO;
         }
 
     }
